@@ -1,0 +1,20 @@
+FROM apache/airflow:2.0.1
+
+ARG USER_ID="1000"
+ARG GROUP_ID="1000"
+
+SHELL ["/bin/bash", "-euox", "pipefail", "-c"]
+
+USER root
+
+# Change UID and GID
+RUN usermod -u ${USER_ID} airflow \
+  && groupmod -g ${GROUP_ID} airflow \
+  && chown -R ${USER_ID}:${GROUP_ID} /opt/airflow
+
+USER airflow
+
+# Install jupyter and Papermill Operator
+RUN pip install \
+  jupyter==1.0.0 \
+  apache-airflow-providers-papermill==1.0.2
