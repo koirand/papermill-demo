@@ -12,7 +12,7 @@ dag = DAG(
 task = PapermillOperator(
     task_id="run_example_notebook",
     input_nb="/tmp/work/example.ipynb",
-    output_nb="/tmp/work/output-airflow.ipynb",
+    output_nb="/tmp/work/example-output-airflow.ipynb",
     parameters={"a": 1, "b": 2},
     dag=dag,
 )
